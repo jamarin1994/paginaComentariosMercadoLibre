@@ -4,7 +4,6 @@ import MaterialTable from "material-table";
 import axios from 'axios';
 import {Modal, TextField, Button, Icon} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
-// import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -14,7 +13,6 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Collapse from '@material-ui/core/Collapse';
 import StarBorder from '@material-ui/icons/StarBorder';
-// import SendIcon from '@material-ui/icons/Send';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 import tableIcons from "./MaterialTabletIcons";
@@ -27,8 +25,7 @@ const columns= [
   { title: 'Nombre', field: 'nombre' },
   { title: 'Email', field: 'email' },
   { title: 'Website', field: 'paginaWeb' },
-  // {field: 'version', type: 'numerioc'}
-  // { title: 'Ventas Estimadas (millones)', field: 'ventas', type: 'numeric'}
+  
 
 ];
 const baseUrl="http://localhost:3001/comentarios";
@@ -76,30 +73,17 @@ function App() {
     comentario: "",
   })
 
-  // function NumberList(props) {
-  //   const numbers = props.numbers;
-  //   const listItems = numbers.map((number) =>
-  //     <ListItem key={number.toString()}
-  //               value={number} />
-  //   );
-  //   return (
-  //     <ul>
-  //       {listItems}
-  //     </ul>
-  //   );
-  // }
-
   const handleClick = () => {
     setOpen(!open);
     if(setOpen !== true){
-      // baseUrl={data}
-      setData(data);
-      data.map((item) =>
-      <li key={item.toString()}>
-        {/* {item.data} */}
-      </li>
-    );
-      console.log("tomaDatos",data)
+      baseUrl={data}
+    //   setData(data);
+    //   data.map((item) =>
+    //   <li key={item.toString()}>
+    //     {/* {item.data} */}
+    //   </li>
+    // );
+    //   console.log("tomaDatos",data)
     }
   };
 
@@ -110,19 +94,10 @@ function App() {
       [name]: value
     }));
   }
-
-  // const validacion =e=>{
-  //   const {campo, value}=e.target;
-  //   setComentarioSelecionado(prevState=>({
-  //     ...prevState,
-  //     [campo]: value
-      
-  //   }));
-  // }
   const peticionGet=async()=>{
     await axios.get(baseUrl)
     .then(response=>{
-      console.log("response",response.data)
+      // console.log("response",response.data)
      setData(response.data);
     }).catch(error=>{
       console.log(error);
@@ -133,7 +108,7 @@ function App() {
     await axios.post(baseUrl, comentarioSelecionado)
     .then(response=>{
       setData(data.concat(response.data));
-      console.log("datosGuardar",response.data)
+      // console.log("datosGuardar",response.data)
       abrirCerrarModalInsertar();
     }).catch(error=>{
       console.log(error);
@@ -153,15 +128,12 @@ function App() {
         }  
       })
       setData(dataNueva);
-      console.log("datosModificar",response.data)
+      // console.log("datosModificar",response.data)
       abrirCerrarModalEditar();
     }).catch(error=>{
       console.log(error);
     })
   }
-  // const listItem  = dataNueva.map((dataNuev) =>
-  // <li>{dataNuev}</li>
-  // )
 
   const peticionDelete=async()=>{
     await axios.delete(baseUrl+"/"+comentarioSelecionado.id)
@@ -293,8 +265,6 @@ function App() {
             }
           ]}
           options={{
-            // icon: SendIcon, 
-            // icon: MailOutlineIcon,
             actionsColumnIndex: -1,
             
 
